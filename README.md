@@ -43,8 +43,10 @@ npx -y opencode-openai-codex-auth@latest --uninstall --all
 ```
 ---
 ## 📦 Models
-- **gpt-5.5** (OA-chat: none/low/medium/high/xhigh, OA-codex: low/medium/high/xhigh — same underlying model, no separate `-codex` deployment)
-- **gpt-5.4** (OA-chat: none/low/medium/high/xhigh, OA-codex: low/medium/high/xhigh — same underlying model, no separate `-codex` deployment)
+- **gpt-5.5 (OA-chat)** (none/low/medium/high/xhigh)
+- **gpt-5.5 (OA-codex)** (low/medium/high/xhigh) — same backend model as OA-chat, no separate `-codex` deployment
+- **gpt-5.4 (OA-chat)** (none/low/medium/high/xhigh)
+- **gpt-5.4 (OA-codex)** (low/medium/high/xhigh) — same backend model as OA-chat, no separate `-codex` deployment
 - **gpt-5.4-mini** (none/low/medium/high/xhigh)
 - **gpt-5.4-nano** (none/low/medium/high/xhigh)
 - **gpt-5.2** (none/low/medium/high/xhigh)
