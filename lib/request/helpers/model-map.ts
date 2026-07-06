@@ -13,8 +13,66 @@
  */
 export const MODEL_MAP: Record<string, string> = {
 // ============================================================================
-// GPT-5.1 Codex Models
+// GPT-5.5 Models (supports none/low/medium/high/xhigh, schema carried over from 5.2)
 // ============================================================================
+	"gpt-5.5": "gpt-5.5",
+	"gpt-5.5-none": "gpt-5.5",
+	"gpt-5.5-low": "gpt-5.5",
+	"gpt-5.5-medium": "gpt-5.5",
+	"gpt-5.5-high": "gpt-5.5",
+	"gpt-5.5-xhigh": "gpt-5.5",
+
+	// ============================================================================
+	// GPT-5.5 Codex Models (low/medium/high/xhigh)
+	// ============================================================================
+	"gpt-5.5-codex": "gpt-5.5-codex",
+	"gpt-5.5-codex-low": "gpt-5.5-codex",
+	"gpt-5.5-codex-medium": "gpt-5.5-codex",
+	"gpt-5.5-codex-high": "gpt-5.5-codex",
+	"gpt-5.5-codex-xhigh": "gpt-5.5-codex",
+
+	// ============================================================================
+	// GPT-5.4 Models (supports none/low/medium/high/xhigh, schema carried over from 5.2)
+	// ============================================================================
+	"gpt-5.4": "gpt-5.4",
+	"gpt-5.4-none": "gpt-5.4",
+	"gpt-5.4-low": "gpt-5.4",
+	"gpt-5.4-medium": "gpt-5.4",
+	"gpt-5.4-high": "gpt-5.4",
+	"gpt-5.4-xhigh": "gpt-5.4",
+
+	// ============================================================================
+	// GPT-5.4 Codex Models (low/medium/high/xhigh)
+	// ============================================================================
+	"gpt-5.4-codex": "gpt-5.4-codex",
+	"gpt-5.4-codex-low": "gpt-5.4-codex",
+	"gpt-5.4-codex-medium": "gpt-5.4-codex",
+	"gpt-5.4-codex-high": "gpt-5.4-codex",
+	"gpt-5.4-codex-xhigh": "gpt-5.4-codex",
+
+	// ============================================================================
+	// GPT-5.4 Mini Models (400k context; same reasoning schema as gpt-5.4)
+	// ============================================================================
+	"gpt-5.4-mini": "gpt-5.4-mini",
+	"gpt-5.4-mini-none": "gpt-5.4-mini",
+	"gpt-5.4-mini-low": "gpt-5.4-mini",
+	"gpt-5.4-mini-medium": "gpt-5.4-mini",
+	"gpt-5.4-mini-high": "gpt-5.4-mini",
+	"gpt-5.4-mini-xhigh": "gpt-5.4-mini",
+
+	// ============================================================================
+	// GPT-5.4 Nano Models (400k context; same reasoning schema as gpt-5.4)
+	// ============================================================================
+	"gpt-5.4-nano": "gpt-5.4-nano",
+	"gpt-5.4-nano-none": "gpt-5.4-nano",
+	"gpt-5.4-nano-low": "gpt-5.4-nano",
+	"gpt-5.4-nano-medium": "gpt-5.4-nano",
+	"gpt-5.4-nano-high": "gpt-5.4-nano",
+	"gpt-5.4-nano-xhigh": "gpt-5.4-nano",
+
+	// ============================================================================
+	// GPT-5.1 Codex Models
+	// ============================================================================
 	"gpt-5.1-codex": "gpt-5.1-codex",
 	"gpt-5.1-codex-low": "gpt-5.1-codex",
 	"gpt-5.1-codex-medium": "gpt-5.1-codex",

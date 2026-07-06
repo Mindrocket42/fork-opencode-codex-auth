@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here. Dates use the ISO format (YYYY-MM-DD).
 
+## [4.5.0] - 2026-07-06
+
+**Model release**: GPT-5.4 and GPT-5.5 support.
+
+### Added
+- **GPT-5.5 / GPT-5.5 Codex**: 1.05M context, 128k output; same none/low/medium/high/xhigh (general) and low/medium/high/xhigh (codex) schema as GPT-5.2.
+- **GPT-5.4 / GPT-5.4 Codex**: 1.05M context, 128k output; same reasoning schema as GPT-5.5.
+- **GPT-5.4 Mini / GPT-5.4 Nano**: 400k context, 128k output; first-class lightweight general-purpose models (default to `low` reasoning, can opt into `xhigh`).
+
+### Changed
+- **Reasoning capability logic**: `getReasoningConfig` now derives `xhigh`/`none` support from the GPT-5.x point-release number instead of a hardcoded flag per version, so future 5.x point releases that follow the same schema (per OpenAI docs) won't require a code change here — only new `MODEL_MAP`/config entries.
+
 ## [4.4.0] - 2026-01-09
 
 **Maintenance release**: OAuth success page version sync.

@@ -104,6 +104,42 @@ describe('Request Transformer Module', () => {
 				expect(normalizeModel('openai/gpt-5.1')).toBe('gpt-5.1');
 				expect(normalizeModel('GPT 5.1 High')).toBe('gpt-5.1');
 			});
+
+			it('should normalize gpt-5.4 presets', async () => {
+				expect(normalizeModel('gpt-5.4')).toBe('gpt-5.4');
+				expect(normalizeModel('gpt-5.4-none')).toBe('gpt-5.4');
+				expect(normalizeModel('gpt-5.4-high')).toBe('gpt-5.4');
+				expect(normalizeModel('gpt-5.4-xhigh')).toBe('gpt-5.4');
+				expect(normalizeModel('openai/gpt-5.4-medium')).toBe('gpt-5.4');
+			});
+
+			it('should normalize gpt-5.4-codex presets', async () => {
+				expect(normalizeModel('gpt-5.4-codex')).toBe('gpt-5.4-codex');
+				expect(normalizeModel('gpt-5.4-codex-low')).toBe('gpt-5.4-codex');
+				expect(normalizeModel('gpt-5.4-codex-xhigh')).toBe('gpt-5.4-codex');
+				expect(normalizeModel('openai/gpt-5.4-codex-high')).toBe('gpt-5.4-codex');
+			});
+
+			it('should normalize gpt-5.4-mini and gpt-5.4-nano presets distinctly from gpt-5.4', async () => {
+				expect(normalizeModel('gpt-5.4-mini')).toBe('gpt-5.4-mini');
+				expect(normalizeModel('gpt-5.4-mini-high')).toBe('gpt-5.4-mini');
+				expect(normalizeModel('gpt-5.4-nano')).toBe('gpt-5.4-nano');
+				expect(normalizeModel('gpt-5.4-nano-low')).toBe('gpt-5.4-nano');
+			});
+
+			it('should normalize gpt-5.5 and gpt-5.5-codex presets', async () => {
+				expect(normalizeModel('gpt-5.5')).toBe('gpt-5.5');
+				expect(normalizeModel('gpt-5.5-xhigh')).toBe('gpt-5.5');
+				expect(normalizeModel('gpt-5.5-codex')).toBe('gpt-5.5-codex');
+				expect(normalizeModel('gpt-5.5-codex-high')).toBe('gpt-5.5-codex');
+				expect(normalizeModel('openai/gpt-5.5-codex-xhigh')).toBe('gpt-5.5-codex');
+			});
+
+			it('should fall back correctly for unmapped gpt-5.4/5.5 variants', async () => {
+				// Not in MODEL_MAP, but should still pattern-match to the right family
+				expect(normalizeModel('gpt-5.4-super-high')).toBe('gpt-5.4');
+				expect(normalizeModel('gpt-5.5-codex-super-high')).toBe('gpt-5.5-codex');
+			});
 		});
 
 		// Edge case tests - legacy gpt-5 models now map to gpt-5.1
@@ -1068,6 +1104,64 @@ describe('Request Transformer Module', () => {
 			};
 			const result = await transformRequestBody(body, codexInstructions, userConfig);
 			expect(result.reasoning?.effort).toBe('low');
+		});
+
+		describe('GPT-5.4 / GPT-5.5 (schema carried forward from GPT-5.2)', () => {
+			it('should default gpt-5.4 and gpt-5.5 general purpose to high effort (supports xhigh)', async () => {
+				const gpt54 = await transformRequestBody({ model: 'gpt-5.4', input: [] }, codexInstructions);
+				expect(gpt54.model).toBe('gpt-5.4');
+				expect(gpt54.reasoning?.effort).toBe('high');
+
+				const gpt55 = await transformRequestBody({ model: 'gpt-5.5', input: [] }, codexInstructions);
+				expect(gpt55.model).toBe('gpt-5.5');
+				expect(gpt55.reasoning?.effort).toBe('high');
+			});
+
+			it('should default gpt-5.4-codex and gpt-5.5-codex to high effort (supports xhigh)', async () => {
+				const result = await transformRequestBody({ model: 'gpt-5.4-codex', input: [] }, codexInstructions);
+				expect(result.model).toBe('gpt-5.4-codex');
+				expect(result.reasoning?.effort).toBe('high');
+
+				const result2 = await transformRequestBody({ model: 'gpt-5.5-codex', input: [] }, codexInstructions);
+				expect(result2.model).toBe('gpt-5.5-codex');
+				expect(result2.reasoning?.effort).toBe('high');
+			});
+
+			it('should preserve xhigh for gpt-5.4/5.5 general purpose and codex', async () => {
+				const userConfig: UserConfig = { global: { reasoningEffort: 'xhigh' }, models: {} };
+
+				const general = await transformRequestBody({ model: 'gpt-5.4-xhigh', input: [] }, codexInstructions, userConfig);
+				expect(general.reasoning?.effort).toBe('xhigh');
+
+				const codex = await transformRequestBody({ model: 'gpt-5.5-codex-xhigh', input: [] }, codexInstructions, userConfig);
+				expect(codex.reasoning?.effort).toBe('xhigh');
+			});
+
+			it('should preserve none for gpt-5.4/5.5 general purpose but upgrade to low for codex', async () => {
+				const userConfig: UserConfig = { global: { reasoningEffort: 'none' }, models: {} };
+
+				const general = await transformRequestBody({ model: 'gpt-5.5-none', input: [] }, codexInstructions, userConfig);
+				expect(general.reasoning?.effort).toBe('none');
+
+				const codex = await transformRequestBody({ model: 'gpt-5.4-codex', input: [] }, codexInstructions, userConfig);
+				expect(codex.reasoning?.effort).toBe('low');
+			});
+
+			it('should default gpt-5.4-mini/nano to a low effort despite supporting xhigh', async () => {
+				const mini = await transformRequestBody({ model: 'gpt-5.4-mini', input: [] }, codexInstructions);
+				expect(mini.model).toBe('gpt-5.4-mini');
+				expect(mini.reasoning?.effort).toBe('low');
+
+				const nano = await transformRequestBody({ model: 'gpt-5.4-nano', input: [] }, codexInstructions);
+				expect(nano.model).toBe('gpt-5.4-nano');
+				expect(nano.reasoning?.effort).toBe('low');
+			});
+
+			it('should still allow explicit xhigh/none overrides for gpt-5.4-mini/nano', async () => {
+				const userConfig: UserConfig = { global: { reasoningEffort: 'xhigh' }, models: {} };
+				const mini = await transformRequestBody({ model: 'gpt-5.4-mini', input: [] }, codexInstructions, userConfig);
+				expect(mini.reasoning?.effort).toBe('xhigh');
+			});
 		});
 
 		it('should use minimal effort for lightweight models', async () => {

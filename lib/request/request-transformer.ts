@@ -47,6 +47,36 @@ export function normalizeModel(model: string | undefined): string {
 	const normalized = modelId.toLowerCase();
 
 	// Priority order for pattern matching (most specific first):
+	// 0a. GPT-5.5 Codex / GPT-5.4 Codex (newest codex models)
+	if (
+		normalized.includes("gpt-5.5-codex") ||
+		normalized.includes("gpt 5.5 codex")
+	) {
+		return "gpt-5.5-codex";
+	}
+	if (
+		normalized.includes("gpt-5.4-codex") ||
+		normalized.includes("gpt 5.4 codex")
+	) {
+		return "gpt-5.4-codex";
+	}
+
+	// 0b. GPT-5.4 Mini / Nano (distinct context limits from base gpt-5.4)
+	if (normalized.includes("gpt-5.4-mini") || normalized.includes("gpt 5.4 mini")) {
+		return "gpt-5.4-mini";
+	}
+	if (normalized.includes("gpt-5.4-nano") || normalized.includes("gpt 5.4 nano")) {
+		return "gpt-5.4-nano";
+	}
+
+	// 0c. GPT-5.5 / GPT-5.4 (general purpose)
+	if (normalized.includes("gpt-5.5") || normalized.includes("gpt 5.5")) {
+		return "gpt-5.5";
+	}
+	if (normalized.includes("gpt-5.4") || normalized.includes("gpt 5.4")) {
+		return "gpt-5.4";
+	}
+
 	// 1. GPT-5.2 Codex (newest codex model)
 	if (
 		normalized.includes("gpt-5.2-codex") ||
@@ -195,15 +225,6 @@ export function getReasoningConfig(
 ): ReasoningConfig {
 	const normalizedName = modelName?.toLowerCase() ?? "";
 
-	// GPT-5.2 Codex is the newest codex model (supports xhigh, but not "none")
-	const isGpt52Codex =
-		normalizedName.includes("gpt-5.2-codex") ||
-		normalizedName.includes("gpt 5.2 codex");
-
-	// GPT-5.2 general purpose (not codex variant)
-	const isGpt52General =
-		(normalizedName.includes("gpt-5.2") || normalizedName.includes("gpt 5.2")) &&
-		!isGpt52Codex;
 	const isCodexMax =
 		normalizedName.includes("codex-max") ||
 		normalizedName.includes("codex max");
@@ -212,39 +233,41 @@ export function getReasoningConfig(
 		normalizedName.includes("codex mini") ||
 		normalizedName.includes("codex_mini") ||
 		normalizedName.includes("codex-mini-latest");
-	const isCodex = normalizedName.includes("codex") && !isCodexMini;
+	const isCodex =
+		normalizedName.includes("codex") && !isCodexMini && !isCodexMax;
+	const isGeneralPurpose = !isCodex && !isCodexMax && !isCodexMini;
 	const isLightweight =
 		!isCodexMini &&
 		(normalizedName.includes("nano") ||
 			normalizedName.includes("mini"));
 
-	// GPT-5.1 general purpose (not codex variants) - supports "none" per OpenAI API docs
-	const isGpt51General =
-		(normalizedName.includes("gpt-5.1") || normalizedName.includes("gpt 5.1")) &&
-		!isCodex &&
-		!isCodexMax &&
-		!isCodexMini;
+	// GPT-5.x point release (e.g. "gpt-5.2" -> 2, "gpt-5.4" -> 4). Bare "gpt-5"
+	// (no minor version) is always remapped to "gpt-5.1" by MODEL_MAP before
+	// reaching this function, so it's treated like 5.1 here as a safe default.
+	const versionMatch = normalizedName.match(/gpt[ -]?5\.(\d+)/);
+	const minorVersion = versionMatch ? parseInt(versionMatch[1], 10) : 1;
 
-	// GPT 5.2, GPT 5.2 Codex, and Codex Max support xhigh reasoning
-	const supportsXhigh = isGpt52General || isGpt52Codex || isCodexMax;
+	// xhigh reasoning was introduced with the 5.2 generation (GPT-5.2, GPT-5.2
+	// Codex) and the same schema has carried forward to every later point
+	// release (5.4, 5.5, ...); Codex Max supports it regardless of version.
+	const supportsXhigh =
+		isCodexMax || (minorVersion >= 2 && (isCodex || isGeneralPurpose));
 
-	// GPT 5.1 general and GPT 5.2 general support "none" reasoning per:
-	// - OpenAI API docs: "gpt-5.1 defaults to none, supports: none, low, medium, high"
-	// - Codex CLI: ReasoningEffort enum includes None variant (codex-rs/protocol/src/openai_models.rs)
-	// - Codex CLI: docs/config.md lists "none" as valid for model_reasoning_effort
-	// - gpt-5.2 (being newer) also supports: none, low, medium, high, xhigh
-	// - Codex models (including GPT-5.2 Codex) do NOT support "none"
-	const supportsNone = isGpt52General || isGpt51General;
+	// "none" reasoning is only offered on general-purpose models per OpenAI API
+	// docs (gpt-5.1 and gpt-5.2 both support it, and later point releases
+	// carry the same schema forward). Codex-tuned models (including Codex
+	// Max/Mini) never support it.
+	const supportsNone = isGeneralPurpose;
 
 	// Default based on model type (Codex CLI defaults)
 	// Note: OpenAI docs say gpt-5.1 defaults to "none", but we default to "medium"
 	// for better coding assistance unless user explicitly requests "none"
 	const defaultEffort: ReasoningConfig["effort"] = isCodexMini
 		? "medium"
-		: supportsXhigh
-			? "high"
-			: isLightweight
-				? "minimal"
+		: isLightweight
+			? "minimal"
+			: supportsXhigh
+				? "high"
 				: "medium";
 
 	// Get user-requested effort
