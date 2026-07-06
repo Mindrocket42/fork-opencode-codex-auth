@@ -16,7 +16,7 @@
       },
       "models": {
         "gpt-5.5": {
-          "name": "GPT 5.5 (OAuth)",
+          "name": "GPT 5.5 (OA-chat)",
           "limit": {
             "context": 1050000,
             "output": 128000
@@ -59,7 +59,7 @@
           }
         },
         "gpt-5.5-codex": {
-          "name": "GPT 5.5 Codex (OAuth)",
+          "name": "GPT 5.5 (OA-codex)",
           "limit": {
             "context": 1050000,
             "output": 128000
@@ -97,7 +97,7 @@
           }
         },
         "gpt-5.4": {
-          "name": "GPT 5.4 (OAuth)",
+          "name": "GPT 5.4 (OA-chat)",
           "limit": {
             "context": 1050000,
             "output": 128000
@@ -140,7 +140,7 @@
           }
         },
         "gpt-5.4-codex": {
-          "name": "GPT 5.4 Codex (OAuth)",
+          "name": "GPT 5.4 (OA-codex)",
           "limit": {
             "context": 1050000,
             "output": 128000
@@ -178,7 +178,7 @@
           }
         },
         "gpt-5.4-mini": {
-          "name": "GPT 5.4 Mini (OAuth)",
+          "name": "GPT 5.4 Mini (OA-chat)",
           "limit": {
             "context": 400000,
             "output": 128000
@@ -221,7 +221,7 @@
           }
         },
         "gpt-5.4-nano": {
-          "name": "GPT 5.4 Nano (OAuth)",
+          "name": "GPT 5.4 Nano (OA-chat)",
           "limit": {
             "context": 400000,
             "output": 128000

@@ -16,7 +16,7 @@
       },
       "models": {
         "gpt-5.5-none": {
-          "name": "GPT 5.5 None (OAuth)",
+          "name": "GPT 5.5 None (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -28,7 +28,7 @@
           }
         },
         "gpt-5.5-low": {
-          "name": "GPT 5.5 Low (OAuth)",
+          "name": "GPT 5.5 Low (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -40,7 +40,7 @@
           }
         },
         "gpt-5.5-medium": {
-          "name": "GPT 5.5 Medium (OAuth)",
+          "name": "GPT 5.5 Medium (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -52,7 +52,7 @@
           }
         },
         "gpt-5.5-high": {
-          "name": "GPT 5.5 High (OAuth)",
+          "name": "GPT 5.5 High (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -64,7 +64,7 @@
           }
         },
         "gpt-5.5-xhigh": {
-          "name": "GPT 5.5 Extra High (OAuth)",
+          "name": "GPT 5.5 Extra High (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -76,7 +76,7 @@
           }
         },
         "gpt-5.5-codex-low": {
-          "name": "GPT 5.5 Codex Low (OAuth)",
+          "name": "GPT 5.5 Low (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -88,7 +88,7 @@
           }
         },
         "gpt-5.5-codex-medium": {
-          "name": "GPT 5.5 Codex Medium (OAuth)",
+          "name": "GPT 5.5 Medium (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -100,7 +100,7 @@
           }
         },
         "gpt-5.5-codex-high": {
-          "name": "GPT 5.5 Codex High (OAuth)",
+          "name": "GPT 5.5 High (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -112,7 +112,7 @@
           }
         },
         "gpt-5.5-codex-xhigh": {
-          "name": "GPT 5.5 Codex Extra High (OAuth)",
+          "name": "GPT 5.5 Extra High (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -124,7 +124,7 @@
           }
         },
         "gpt-5.4-none": {
-          "name": "GPT 5.4 None (OAuth)",
+          "name": "GPT 5.4 None (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -136,7 +136,7 @@
           }
         },
         "gpt-5.4-low": {
-          "name": "GPT 5.4 Low (OAuth)",
+          "name": "GPT 5.4 Low (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -148,7 +148,7 @@
           }
         },
         "gpt-5.4-medium": {
-          "name": "GPT 5.4 Medium (OAuth)",
+          "name": "GPT 5.4 Medium (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -160,7 +160,7 @@
           }
         },
         "gpt-5.4-high": {
-          "name": "GPT 5.4 High (OAuth)",
+          "name": "GPT 5.4 High (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -172,7 +172,7 @@
           }
         },
         "gpt-5.4-xhigh": {
-          "name": "GPT 5.4 Extra High (OAuth)",
+          "name": "GPT 5.4 Extra High (OA-chat)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -184,7 +184,7 @@
           }
         },
         "gpt-5.4-codex-low": {
-          "name": "GPT 5.4 Codex Low (OAuth)",
+          "name": "GPT 5.4 Low (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -196,7 +196,7 @@
           }
         },
         "gpt-5.4-codex-medium": {
-          "name": "GPT 5.4 Codex Medium (OAuth)",
+          "name": "GPT 5.4 Medium (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -208,7 +208,7 @@
           }
         },
         "gpt-5.4-codex-high": {
-          "name": "GPT 5.4 Codex High (OAuth)",
+          "name": "GPT 5.4 High (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -220,7 +220,7 @@
           }
         },
         "gpt-5.4-codex-xhigh": {
-          "name": "GPT 5.4 Codex Extra High (OAuth)",
+          "name": "GPT 5.4 Extra High (OA-codex)",
           "limit": { "context": 1050000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -232,7 +232,7 @@
           }
         },
         "gpt-5.4-mini-none": {
-          "name": "GPT 5.4 Mini None (OAuth)",
+          "name": "GPT 5.4 Mini None (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -244,7 +244,7 @@
           }
         },
         "gpt-5.4-mini-low": {
-          "name": "GPT 5.4 Mini Low (OAuth)",
+          "name": "GPT 5.4 Mini Low (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -256,7 +256,7 @@
           }
         },
         "gpt-5.4-mini-medium": {
-          "name": "GPT 5.4 Mini Medium (OAuth)",
+          "name": "GPT 5.4 Mini Medium (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -268,7 +268,7 @@
           }
         },
         "gpt-5.4-mini-high": {
-          "name": "GPT 5.4 Mini High (OAuth)",
+          "name": "GPT 5.4 Mini High (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -280,7 +280,7 @@
           }
         },
         "gpt-5.4-mini-xhigh": {
-          "name": "GPT 5.4 Mini Extra High (OAuth)",
+          "name": "GPT 5.4 Mini Extra High (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -292,7 +292,7 @@
           }
         },
         "gpt-5.4-nano-none": {
-          "name": "GPT 5.4 Nano None (OAuth)",
+          "name": "GPT 5.4 Nano None (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -304,7 +304,7 @@
           }
         },
         "gpt-5.4-nano-low": {
-          "name": "GPT 5.4 Nano Low (OAuth)",
+          "name": "GPT 5.4 Nano Low (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -316,7 +316,7 @@
           }
         },
         "gpt-5.4-nano-medium": {
-          "name": "GPT 5.4 Nano Medium (OAuth)",
+          "name": "GPT 5.4 Nano Medium (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -328,7 +328,7 @@
           }
         },
         "gpt-5.4-nano-high": {
-          "name": "GPT 5.4 Nano High (OAuth)",
+          "name": "GPT 5.4 Nano High (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {
@@ -340,7 +340,7 @@
           }
         },
         "gpt-5.4-nano-xhigh": {
-          "name": "GPT 5.4 Nano Extra High (OAuth)",
+          "name": "GPT 5.4 Nano Extra High (OA-chat)",
           "limit": { "context": 400000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] },
           "options": {

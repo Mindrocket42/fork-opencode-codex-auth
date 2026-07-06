@@ -2,7 +2,7 @@ import { logDebug, logWarn } from "../logger.js";
 import { TOOL_REMAP_MESSAGE } from "../prompts/codex.js";
 import { CODEX_OPENCODE_BRIDGE } from "../prompts/codex-opencode-bridge.js";
 import { getOpenCodeCodexPrompt } from "../prompts/opencode-codex.js";
-import { getNormalizedModel } from "./helpers/model-map.js";
+import { getNormalizedModel, resolveWireModel } from "./helpers/model-map.js";
 import {
 	filterOpenCodeSystemPromptsWithCachedPrompt,
 	normalizeOrphanedToolOutputs,
@@ -465,8 +465,11 @@ export async function transformRequestBody(
 		},
 	);
 
-	// Normalize model name for API call
-	body.model = normalizedModel;
+	// Normalize model name for API call. Note: this may differ from `normalizedModel`
+	// itself - some normalized names are internal-only "family keys" used for
+	// reasoning/instructions selection but aren't valid literal model names on the
+	// ChatGPT backend (e.g. "gpt-5.4-codex" -> "gpt-5.4"). See resolveWireModel.
+	body.model = resolveWireModel(normalizedModel);
 
 	// Codex required fields
 	// ChatGPT backend REQUIRES store=false (confirmed via testing)

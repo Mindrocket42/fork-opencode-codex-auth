@@ -1119,12 +1119,22 @@ describe('Request Transformer Module', () => {
 
 			it('should default gpt-5.4-codex and gpt-5.5-codex to high effort (supports xhigh)', async () => {
 				const result = await transformRequestBody({ model: 'gpt-5.4-codex', input: [] }, codexInstructions);
-				expect(result.model).toBe('gpt-5.4-codex');
 				expect(result.reasoning?.effort).toBe('high');
 
 				const result2 = await transformRequestBody({ model: 'gpt-5.5-codex', input: [] }, codexInstructions);
-				expect(result2.model).toBe('gpt-5.5-codex');
 				expect(result2.reasoning?.effort).toBe('high');
+			});
+
+			it('should send the plain model name on the wire for gpt-5.4-codex/gpt-5.5-codex (confirmed: backend rejects the -codex suffix for these)', async () => {
+				// Unlike GPT-5.1/5.2, GPT-5.4/5.5 have no distinct "-codex" backend
+				// deployment - "codex" here is only a prompt/reasoning-defaults choice
+				// on our side. Sending the literal "-codex" suffix as the model name
+				// gets rejected by the ChatGPT backend with a 400 Bad Request.
+				const result = await transformRequestBody({ model: 'gpt-5.4-codex', input: [] }, codexInstructions);
+				expect(result.model).toBe('gpt-5.4');
+
+				const result2 = await transformRequestBody({ model: 'gpt-5.5-codex-high', input: [] }, codexInstructions);
+				expect(result2.model).toBe('gpt-5.5');
 			});
 
 			it('should preserve xhigh for gpt-5.4/5.5 general purpose and codex', async () => {

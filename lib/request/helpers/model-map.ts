@@ -178,3 +178,31 @@ export function getNormalizedModel(modelId: string): string | undefined {
 export function isKnownModel(modelId: string): boolean {
 	return getNormalizedModel(modelId) !== undefined;
 }
+
+/**
+ * Wire model overrides
+ *
+ * Some normalized model names are our own internal "family key" - used to pick
+ * system instructions and reasoning-effort defaults - but are NOT valid model
+ * names on the ChatGPT/Codex backend itself. Confirmed via testing: unlike
+ * GPT-5.1/5.2, GPT-5.4/5.5 do not have a distinct "-codex" backend deployment -
+ * the ChatGPT backend rejects "gpt-5.4-codex"/"gpt-5.5-codex" outright
+ * ("model is not supported when using Codex with a ChatGPT account"). The
+ * "codex" flavor for these is purely a prompt/reasoning-defaults choice on our
+ * side, so the literal API call must use the plain model name.
+ */
+const WIRE_MODEL_OVERRIDES: Record<string, string> = {
+	"gpt-5.4-codex": "gpt-5.4",
+	"gpt-5.5-codex": "gpt-5.5",
+};
+
+/**
+ * Resolve the literal model name to send to the ChatGPT/Codex backend.
+ * Defaults to the normalized model name unchanged unless a wire override applies.
+ *
+ * @param normalizedModel - Our internal normalized/family-key model name
+ * @returns The model string to actually put on the wire
+ */
+export function resolveWireModel(normalizedModel: string): string {
+	return WIRE_MODEL_OVERRIDES[normalizedModel] ?? normalizedModel;
+}
