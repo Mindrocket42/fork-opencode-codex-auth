@@ -7,12 +7,13 @@ All notable changes to this project are documented here. Dates use the ISO forma
 **Model release**: GPT-5.4 and GPT-5.5 support.
 
 ### Added
-- **GPT-5.5 / GPT-5.5 Codex**: 1.05M context, 128k output; same none/low/medium/high/xhigh (general) and low/medium/high/xhigh (codex) schema as GPT-5.2.
-- **GPT-5.4 / GPT-5.4 Codex**: 1.05M context, 128k output; same reasoning schema as GPT-5.5.
+- **GPT-5.5 (OA-chat) / GPT-5.5 (OA-codex)**: 1.05M context, 128k output; same none/low/medium/high/xhigh (chat) and low/medium/high/xhigh (codex) reasoning schema as GPT-5.2. Both presets call the same underlying `gpt-5.5` model — confirmed via testing that GPT-5.4/5.5, unlike GPT-5.1/5.2, have no distinct `-codex` backend deployment. "Codex" here only changes which system prompt and reasoning defaults the plugin applies.
+- **GPT-5.4 (OA-chat) / GPT-5.4 (OA-codex)**: 1.05M context, 128k output; same reasoning schema as GPT-5.5, same "same model either way" caveat above.
 - **GPT-5.4 Mini / GPT-5.4 Nano**: 400k context, 128k output; first-class lightweight general-purpose models (default to `low` reasoning, can opt into `xhigh`).
 
 ### Changed
 - **Reasoning capability logic**: `getReasoningConfig` now derives `xhigh`/`none` support from the GPT-5.x point-release number instead of a hardcoded flag per version, so future 5.x point releases that follow the same schema (per OpenAI docs) won't require a code change here — only new `MODEL_MAP`/config entries.
+- **Wire model resolution**: added `resolveWireModel()` in `model-map.ts` to decouple the plugin's internal "family key" (used to pick codex-flavored instructions/reasoning defaults) from the literal model string sent to the ChatGPT backend. The `gpt-5.4-codex`/`gpt-5.5-codex` config keys now correctly resolve to `gpt-5.4`/`gpt-5.5` on the wire instead of being rejected with `"model is not supported when using Codex with a ChatGPT account"`.
 
 ## [4.4.0] - 2026-01-09
 
