@@ -104,6 +104,7 @@ The main entry point orchestrates a **7-step fetch flow**:
 - All `gpt-5.1-codex-mini*` variants → `gpt-5.1-codex-mini`
 - All `gpt-5.2` variants → `gpt-5.2`
 - All `gpt-5.1` variants → `gpt-5.1`
+- Known mappings take priority; otherwise newer model IDs (`gpt-5.3+`, `gpt-6+`) pass through unchanged (lowercased) instead of being downgraded to GPT-5.1
 - **Legacy mappings** (GPT-5.0 being phased out):
   - `gpt-5-codex*` variants → `gpt-5.1-codex`
   - `gpt-5-codex-mini*` or `codex-mini-latest` → `gpt-5.1-codex-mini`

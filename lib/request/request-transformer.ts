@@ -77,6 +77,12 @@ export function normalizeModel(model: string | undefined): string {
 		return "gpt-5.4";
 	}
 
+	// 0d. Future GPT families: keep exact model IDs rather than silently downgrading
+	// them to GPT-5.1. Existing explicit/family mappings above still take priority.
+	if (/^gpt-(5\.([3-9]|\d{2,})|[6-9]|[1-9]\d)(?:-|$)/.test(normalized)) {
+		return normalized;
+	}
+
 	// 1. GPT-5.2 Codex (newest codex model)
 	if (
 		normalized.includes("gpt-5.2-codex") ||

@@ -25,6 +25,21 @@ describe('Request Transformer Module', () => {
 			expect(normalizeModel('gpt-5')).toBe('gpt-5.1');
 		});
 
+		it('should pass through newer model names not covered by explicit mappings', async () => {
+			expect(normalizeModel('gpt-5.3')).toBe('gpt-5.3');
+			expect(normalizeModel('gpt-5.6-luna')).toBe('gpt-5.6-luna');
+			expect(normalizeModel('gpt-6-astra')).toBe('gpt-6-astra');
+			expect(normalizeModel('gpt-10')).toBe('gpt-10');
+			expect(normalizeModel('GPT-10-Astra')).toBe('gpt-10-astra');
+		});
+
+		it('should keep existing explicit and legacy normalization ahead of passthrough', async () => {
+			expect(normalizeModel('gpt-5.5-codex-super-high')).toBe('gpt-5.5-codex');
+			expect(normalizeModel('gpt-5.4-super-high')).toBe('gpt-5.4');
+			expect(normalizeModel('gpt-5.2')).toBe('gpt-5.2');
+			expect(normalizeModel('gpt-5-codex')).toBe('gpt-5.1-codex');
+		});
+
 		it('should normalize variants containing "codex" to gpt-5.1-codex', async () => {
 			expect(normalizeModel('openai/gpt-5-codex')).toBe('gpt-5.1-codex');
 			expect(normalizeModel('custom-gpt-5-codex-variant')).toBe('gpt-5.1-codex');
