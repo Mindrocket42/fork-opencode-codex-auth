@@ -32,6 +32,6 @@ If you apply a template by hand, replace its `plugin` entry with a file URL poin
 ]
 ```
 
-Use your own checkout path. Do not leave the placeholder path or use `opencode-openai-codex-auth` as the plugin entry; that package name resolves to the upstream npm release. Merge the template's `provider.openai` settings into your existing config instead of overwriting unrelated settings.
+Use your own checkout path. Do not leave the placeholder path or use `opencode-openai-codex-auth` as the plugin entry; that identifier requests an npm package and does not refer to this checkout. Merge the template's `provider.openai` settings into your existing config instead of overwriting unrelated settings.
 
 See [Getting Started](../docs/getting-started.md) and the [Configuration Guide](../docs/configuration.md) for complete instructions.

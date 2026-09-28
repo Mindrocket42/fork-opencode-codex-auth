@@ -2,7 +2,7 @@
 
 ![OpenCode Codex OAuth local fork](assets/readme-hero.svg)
 
-This repository is an unpublished working fork of [Numman Ali's upstream project](https://github.com/numman-ali/opencode-openai-codex-auth). The inherited package name is `opencode-openai-codex-auth`, but this fork is not published to npm. Running `npx -y opencode-openai-codex-auth@latest` downloads the upstream npm release; it does not install this checkout.
+This repository is an unpublished working fork of [Numman Ali's upstream project](https://github.com/numman-ali/opencode-openai-codex-auth). The inherited package identifier is `opencode-openai-codex-auth`, but this checkout has no npm release of its own. The inherited `npx -y opencode-openai-codex-auth@latest` command is not a source-checkout install and cannot install the files in this working tree.
 
 ## Install this fork
 
@@ -76,6 +76,5 @@ npm run build
 - [Troubleshooting](docs/troubleshooting.md)
 - [Privacy and data handling](docs/privacy.md)
 - [Changelog](CHANGELOG.md)
-- [Original upstream npm package](https://www.npmjs.com/package/opencode-openai-codex-auth) — separate from this fork
 
 This plugin uses OpenAI's OAuth flow for individual use with your own ChatGPT subscription. It is not an OpenAI product. See [LICENSE](LICENSE) and the upstream project for attribution.

@@ -1,6 +1,6 @@
 # Getting Started
 
-This guide installs the code in this repository. This fork is not published to npm. Its inherited package name is also used by the upstream project, so `npx -y opencode-openai-codex-auth@latest` downloads upstream code, not this checkout.
+This guide installs the code in this repository. This fork is not published to npm. The inherited `npx -y opencode-openai-codex-auth@latest` command is not a source-checkout install; it cannot install the working tree you are editing. Use the steps below.
 
 ## Requirements
 

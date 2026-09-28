@@ -21,4 +21,4 @@ These guides describe the unpublished local fork in this repository. Begin with 
 
 - [This fork](https://github.com/Mindrocket42/fork-opencode-codex-auth)
 - [Upstream project](https://github.com/numman-ali/opencode-openai-codex-auth)
-- [Upstream npm package](https://www.npmjs.com/package/opencode-openai-codex-auth) — it is not this fork's distribution channel
+This fork has no npm distribution; install it from a local checkout.

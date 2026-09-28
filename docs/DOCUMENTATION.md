@@ -50,7 +50,7 @@ This document explains the organization of documentation in this repository.
 
 Enable GitHub Pages in repository settings:
 - **Source**: `main` branch, `/docs` folder
-- **URL**: `https://your-username.github.io/opencode-codex-plugin/`
+- **URL**: Use the generated address shown in this repository's Settings → Pages. The documentation entry point is [`docs/index.md`](index.md).
 
 The site automatically serves:
 - `docs/index.md` as homepage

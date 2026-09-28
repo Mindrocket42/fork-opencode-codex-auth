@@ -5,7 +5,7 @@
 ## [Unreleased]
 
 ### Changed
-- Setup documentation now targets this local fork rather than the upstream npm package.
+- Setup documentation now targets this local fork rather than an npm package.
 - The installer points OpenCode at this checkout's built `dist/index.js` and can remove that local entry.
 - Package metadata marks the checkout private and points repository links at this fork.
 

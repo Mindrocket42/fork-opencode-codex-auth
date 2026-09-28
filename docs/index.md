@@ -23,4 +23,4 @@ This is documentation for the local source fork in this repository. The fork is 
 - [Issues for this fork](https://github.com/Mindrocket42/fork-opencode-codex-auth/issues)
 - [This fork's commit history](https://github.com/Mindrocket42/fork-opencode-codex-auth/commits/main)
 - [Upstream source project](https://github.com/numman-ali/opencode-openai-codex-auth)
-- [Upstream npm package](https://www.npmjs.com/package/opencode-openai-codex-auth) — separate from this fork
+This fork has no npm distribution; use the local-checkout installation guide above.
