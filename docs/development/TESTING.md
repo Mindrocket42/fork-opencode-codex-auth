@@ -9,7 +9,7 @@ Comprehensive testing matrix for all config scenarios and backwards compatibilit
 **Config:**
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"]
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"]
 }
 ```
 
@@ -40,7 +40,7 @@ Comprehensive testing matrix for all config scenarios and backwards compatibilit
 **Config:**
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "options": {
@@ -81,7 +81,7 @@ Comprehensive testing matrix for all config scenarios and backwards compatibilit
 **Config:**
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "options": {
@@ -116,7 +116,7 @@ Comprehensive testing matrix for all config scenarios and backwards compatibilit
 **Config:**
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "models": {
@@ -209,7 +209,7 @@ API receives: "gpt-5-codex" ✅
 **Config:**
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"]
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"]
 }
 ```
 
@@ -346,7 +346,7 @@ Turn 4: > now delete it
 **Config:**
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "model": "openai/gpt-5-codex"
 }
 ```
@@ -448,7 +448,7 @@ DEBUG_CODEX_PLUGIN=1 opencode run "test" --model=openai/gpt-5-codex
 # 2. Use minimal config
 cat > ~/.config/opencode/opencode.jsonc <<'EOF'
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "model": "openai/gpt-5-codex"
 }
 EOF
@@ -472,7 +472,7 @@ DEBUG_CODEX_PLUGIN=1 opencode run "write hello world to test.txt"
 # Update config with custom models
 cat > ~/.config/opencode/opencode.jsonc <<'EOF'
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "models": {

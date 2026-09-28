@@ -162,8 +162,9 @@ Items are not persisted when `store` is set to false.
 
 **Solution:**
 ```bash
-# Update plugin
-npx -y opencode-openai-codex-auth@latest
+# From the checkout root, rebuild and refresh the local installation
+npm run build
+node scripts/install-opencode-codex-auth.js
 
 # Restart OpenCode
 opencode
@@ -381,12 +382,12 @@ cat ~/.opencode/logs/codex-plugin/request-*-stream-full.json | grep -o '"total_t
 
 2. **Collect info:**
    - OpenCode version: `opencode --version`
-   - Plugin version: Check `package.json` or npm
+   - Plugin version: Check the checkout commit with `git rev-parse --short HEAD`
    - Error logs from `~/.opencode/logs/codex-plugin/`
    - Config file (redact sensitive info)
 
 3. **Check existing issues:**
-   - [GitHub Issues](https://github.com/numman-ali/opencode-openai-codex-auth/issues)
+   - [GitHub Issues](https://github.com/Mindrocket42/fork-opencode-codex-auth/issues)
 
 ### Reporting Bugs
 

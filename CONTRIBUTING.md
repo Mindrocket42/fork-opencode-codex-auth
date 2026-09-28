@@ -1,6 +1,8 @@
 # Contributing Guidelines
 
-Thank you for your interest in contributing to opencode-openai-codex-auth!
+Thank you for your interest in contributing to this local fork of opencode-openai-codex-auth.
+
+This fork is not published to npm. Run and test changes from a checkout of this repository; report the checkout commit when filing issues.
 
 Before submitting contributions, please review these guidelines to ensure all changes maintain compliance with OpenAI's Terms of Service and the project's goals.
 

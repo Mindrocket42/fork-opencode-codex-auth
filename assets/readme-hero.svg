@@ -23,9 +23,9 @@
     OpenCode Codex OAuth
   </text>
   <text x="420" y="170" fill="#cbd5f5" font-size="24" font-family="'IBM Plex Sans','Segoe UI',Arial,sans-serif">
-    ChatGPT Plus/Pro auth for GPT-5.2 and Codex models
+    ChatGPT subscription auth for OpenCode Codex models
   </text>
   <text x="420" y="220" fill="#7dd3fc" font-size="18" font-family="'IBM Plex Sans','Segoe UI',Arial,sans-serif">
-    One-command install, modern variants, full tool support
+    Local source fork; install from this checkout
   </text>
 </svg>

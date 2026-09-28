@@ -1,5 +1,14 @@
 # Changelog
 
+> Historical release notes below are inherited from the upstream project. They do not describe npm releases of this fork. See [README.md](README.md) for the current local-checkout install and update instructions.
+
+## [Unreleased]
+
+### Changed
+- Setup documentation now targets this local fork rather than the upstream npm package.
+- The installer points OpenCode at this checkout's built `dist/index.js` and can remove that local entry.
+- Package metadata marks the checkout private and points repository links at this fork.
+
 All notable changes to this project are documented here. Dates use the ISO format (YYYY-MM-DD).
 
 ## [4.5.0] - 2026-07-06
@@ -49,7 +58,7 @@ Confirmed via testing: GPT-5.4/5.5, unlike GPT-5.1/5.2, have no distinct `-codex
 **Feature + reliability release**: variants support, one-command installer, and auth/error handling fixes.
 
 ### Added
-- **One-command installer/update**: `npx -y opencode-openai-codex-auth@latest` (global config, backup, cache clear) with `--legacy` for OpenCode v1.0.209 and below.
+- **Upstream installer (historical)**: The upstream project's npm installer handled global config, backups, and cache clearing. This unpublished fork uses the local-checkout installer described in [README.md](README.md).
 - **Modern variants config**: `config/opencode-modern.json` for OpenCode v1.0.210+; legacy presets remain in `config/opencode-legacy.json`.
 - **Installer CLI** bundled as package bin for cross-platform use (Windows/macOS/Linux).
 

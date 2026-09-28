@@ -1,5 +1,7 @@
 # Configuration Guide
 
+> This fork is not published to npm. Replace the local file URL shown in these examples with the absolute file URL for your checkout's `dist/index.js`, or run the repository installer to set it automatically.
+
 Complete reference for configuring the OpenCode OpenAI Codex Auth Plugin.
 
 ## Quick Reference
@@ -7,7 +9,7 @@ Complete reference for configuring the OpenCode OpenAI Codex Auth Plugin.
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "options": {
@@ -183,7 +185,7 @@ Apply same settings to all models:
 
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "options": {
@@ -204,7 +206,7 @@ Different settings for different models:
 
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "options": {
@@ -331,7 +333,7 @@ Global config has defaults, project overrides for specific work:
 **~/.config/opencode/opencode.jsonc** (global, preferred):
 ```json
 {
-  "plugin": ["opencode-openai-codex-auth"],
+  "plugin": ["file:///absolute/path/to/fork-opencode-codex-auth/dist/index.js"],
   "provider": {
     "openai": {
       "options": {

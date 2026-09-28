@@ -22,7 +22,7 @@ What actually happens.
 
 **Environment**
 - opencode version:
-- Plugin version:
+- Fork commit (`git rev-parse --short HEAD`):
 - Operating System:
 - Node.js version:
 

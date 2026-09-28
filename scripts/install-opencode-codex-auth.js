@@ -2,7 +2,7 @@
 
 import { existsSync } from "node:fs";
 import { readFile, writeFile, mkdir, copyFile, rm } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { parse, modify, applyEdits, printParseErrorCode } from "jsonc-parser";
@@ -11,11 +11,11 @@ const PLUGIN_NAME = "opencode-openai-codex-auth";
 const args = new Set(process.argv.slice(2));
 
 if (args.has("--help") || args.has("-h")) {
-	console.log(`Usage: ${PLUGIN_NAME} [--modern|--legacy] [--uninstall] [--all] [--dry-run] [--no-cache-clear]\n\n` +
+	console.log(`Usage: node scripts/install-opencode-codex-auth.js [--modern|--legacy] [--uninstall] [--all] [--dry-run] [--no-cache-clear]\n\n` +
 		"Default behavior:\n" +
 		"  - Installs/updates global config at ~/.config/opencode/opencode.jsonc (falls back to .json)\n" +
 		"  - Uses modern config (variants) by default\n" +
-		"  - Ensures plugin is unpinned (latest)\n" +
+		"  - Uses the local dist/index.js built from this checkout\n" +
 		"  - Clears OpenCode plugin cache\n\n" +
 		"Options:\n" +
 		"  --modern           Force modern config (default)\n" +
@@ -37,6 +37,8 @@ const skipCacheClear = args.has("--no-cache-clear");
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, "..");
+const LOCAL_PLUGIN_ENTRY = pathToFileURL(join(repoRoot, "dist", "index.js")).href;
+const LOCAL_PLUGIN_SUFFIX = "/fork-opencode-codex-auth/dist/index.js";
 const templatePath = join(
 	repoRoot,
 	"config",
@@ -63,24 +65,23 @@ function log(message) {
 	console.log(message);
 }
 
+function isManagedPluginEntry(entry) {
+	if (typeof entry !== "string") return false;
+	return entry === LOCAL_PLUGIN_ENTRY
+		|| (entry.startsWith("file://") && entry.includes(LOCAL_PLUGIN_SUFFIX))
+		|| entry === PLUGIN_NAME
+		|| entry.startsWith(`${PLUGIN_NAME}@`)
+		|| entry.includes(PLUGIN_NAME);
+}
+
 function normalizePluginList(list) {
 	const entries = Array.isArray(list) ? list.filter(Boolean) : [];
-	const filtered = entries.filter((entry) => {
-		if (typeof entry !== "string") return true;
-		return entry !== PLUGIN_NAME && !entry.startsWith(`${PLUGIN_NAME}@`);
-	});
-	return [...filtered, PLUGIN_NAME];
+	return [...entries.filter((entry) => !isManagedPluginEntry(entry)), LOCAL_PLUGIN_ENTRY];
 }
 
 function removePluginEntries(list) {
 	const entries = Array.isArray(list) ? list.filter(Boolean) : [];
-	return entries.filter((entry) => {
-		if (typeof entry !== "string") return true;
-		if (entry === PLUGIN_NAME || entry.startsWith(`${PLUGIN_NAME}@`)) {
-			return false;
-		}
-		return !entry.includes(PLUGIN_NAME);
-	});
+	return entries.filter((entry) => !isManagedPluginEntry(entry));
 }
 
 function mergeOpenAIConfig(existingOpenAI, templateOpenAI) {
@@ -288,6 +289,11 @@ async function main() {
 	if (!existsSync(templatePath)) {
 		throw new Error(`Config template not found at ${templatePath}`);
 	}
+	if (!uninstallRequested && !existsSync(join(repoRoot, "dist", "index.js"))) {
+		throw new Error(
+			`Built plugin not found at ${join(repoRoot, "dist", "index.js")}. Run npm ci and npm run build from the repository root first.`,
+		);
+	}
 
 	const configPath = resolveConfigPath();
 	const configExists = existsSync(configPath);
@@ -369,7 +375,7 @@ async function main() {
 	}
 
 	const template = await readJson(templatePath);
-	template.plugin = [PLUGIN_NAME];
+	template.plugin = [LOCAL_PLUGIN_ENTRY];
 
 	let nextConfig = template;
 	let nextContent = null;
@@ -417,6 +423,7 @@ async function main() {
 
 	await clearCache();
 
+	log(`Configured local plugin: ${LOCAL_PLUGIN_ENTRY}`);
 	log("\nDone. Restart OpenCode to (re)install the plugin.");
 	log("Example: opencode");
 	if (useLegacy) {
